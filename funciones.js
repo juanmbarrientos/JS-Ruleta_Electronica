@@ -3,13 +3,14 @@
         let numRandom2 = (Math.round(Math.random()*(36-0)+0));
         const gallery = document.getElementById('gallery')
         const arraySelecionado = [];
-        
-        // RECARGA LA PÁGINA Y EJECUTA EL RANDOM
-        // setInterval("location.reload()",8000);
-        
         const nResultados = [];
         const contar = nResultados.push(numRandom2);
-        
+
+       
+
+        // RECARGA LA PÁGINA Y EJECUTA EL RANDOM
+        // setInterval("location.reload()",8000);
+               
         function categorizar(){
             let colorear = document.getElementById("resultado");
             if (numRandom2 >= 1 && numRandom2 <= 36){
@@ -28,10 +29,7 @@
 
             document.getElementById("resultado").innerHTML=numRandom2;
             localStorage.setItem(nResultados, JSON.stringify(numRandom2));
-        }
-
-
-        
+        }      
         
         gallery.addEventListener('click', (e) => {
             console.log(e.target.textContent);
@@ -39,16 +37,62 @@
             const numSelecionado = parseInt(e.target.textContent);
             arraySelecionado.push(numSelecionado);
         })
+        
+
+        let pesos = 0;
+        let nuevoSaldo = pesos;
+        let ganador = 35;
+        let saldo = document.getElementById("saldo").textContent = nuevoSaldo;
 
         function validar_jugada(){
-            if ((arraySelecionado.includes(numRandom2) === true)){
-                alert("Eres un Ganador")
-                // console.log("Eres un ganador");
+            if (nuevoSaldo <= 0){
+                console.log("No tienes saldo para jugar")
             }else{
-                // console.log("segui participando");
-                alert("Seguir participando")
+                if ((arraySelecionado.includes(numRandom2) === true)){
+                    alert("Eres un Ganador");
+                    console.log(nuevoSaldo - arraySelecionado.length)
+                    console.log(nuevoSaldo = ganador + pesos);
+                }else{
+                    console.log(saldo - arraySelecionado.length); 
+                    alert("Seguir participando");
+                }
             }
         }
+
+
+
+
+        // let pesos = 100;
+        // let nuevoSaldo = pesos;
+        // let ganador = 35;
+        // let saldo = document.getElementById("saldo").textContent = nuevoSaldo;
+
+        // function validar_jugada(){
+        //     if ((arraySelecionado.includes(numRandom2) === true)){
+        //         alert("Eres un Ganador");
+        //         console.log(nuevoSaldo = ganador + pesos);
+        //     }else{
+        //         console.log(saldo - arraySelecionado.length); 
+        //         alert("Seguir participando");
+        //     }
+        // }
+    
+
+
+
+
+        // let pesos = 20;
+        // let saldo = document.getElementById("saldo").textContent = pesos;
+        // let ganador = 35;
+
+        // function validar_jugada(){
+        //     if ((arraySelecionado.includes(numRandom2) === true)){
+        //         alert("Eres un Ganador");
+        //         saldo = pesos + ganador;
+        //     }else{
+        //         alert("Seguir participando")
+        //     }
+        // }
     
         
 
