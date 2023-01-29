@@ -1,9 +1,10 @@
  
-        // Crea el numero ramdon
-        let numRandom2 = (Math.round(Math.random()*(36-0)+0));
         
         // llama al galery = tablero
         const gallery = document.getElementById('gallery')
+        
+        // Crea el numero ramdon
+        let numRandom2 = (Math.round(Math.random()*(36-0)+0));
         
         // donde se pushean los numeros que se guardan del tablero
         const arraySelecionado = [];
@@ -16,8 +17,6 @@
     
         // Transfiere los numero elegidos al arraySeleccionado.
         let numSelecionado = "";
-
-
 
         // RECARGA LA PÁGINA Y EJECUTA EL RANDOM
         // setInterval("location.reload()",8000);
@@ -58,8 +57,9 @@
 
         let pesos = 100;
         let nuevoSaldo = pesos;
+        let saldo = document.getElementById("saldo");
+        let resultado_apuesta = document.getElementById("resultado_apuesta");
         let ganador = 36;
-        let saldo = document.getElementById("saldo").textContent = nuevoSaldo;
 
         function validar_jugada(){
             let consumoFichas = nuevoSaldo - arraySelecionado.length;
@@ -67,12 +67,11 @@
                 alert("No tienes saldo para jugar")
             }else{
                 if ((arraySelecionado.includes(numRandom2) === true)){
-                    alert("Eres un Ganador");
-                    console.log(nuevoSaldo = consumoFichas + ganador);
+                    saldo.innerHTML = (consumoFichas + ganador);
+                    resultado_apuesta.innerHTML = "Eres un ganador";
                 }else{
-                    alert("Seguir participando");
-
-                    console.log(consumoFichas); 
+                    saldo.innerHTML = consumoFichas;
+                    resultado_apuesta.innerHTML = "Seguí participando"
                 }
             }
         }
@@ -82,7 +81,7 @@ let tiempo = document.getElementById("tiempo_restante");
 let mensaje = document.getElementById("mensaje_tiempo");
 let contenedor_resultado = document.getElementById("contenedor_resultado")
 
-let cont = 30;
+let cont = 10;
 
 setInterval(() =>{
     tiempo.innerHTML = cont--;
@@ -97,12 +96,32 @@ setInterval(() =>{
         mensaje.innerHTML = "¡No va más!";
         mensaje.classList.add("no_va_mas");
     }else if (cont == 0){
-        location.reload(); 
+        validar_jugada();
+        clearInterval();
+        tiempo_pagos();
+        galery();
     }
 },1000)
 
 
 
+let cont_pagos = 15;
+
+function tiempo_pagos(){
+    setInterval(() =>{
+            tiempo.innerHTML = cont_pagos--;
+            if(cont_pagos == 14){
+                mensaje.innerHTML = "No puedes apostar. Tiempo de pagos";
+                mensaje.classList.add("tiempo_espera");
+            }else if (cont_pagos == 0){
+                location.reload();
+            }
+},1000)
+}
+
+function galery(){
+    gallery.classList.add("gallery_disable");
+}
 
 
 
